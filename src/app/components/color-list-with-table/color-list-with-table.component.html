@@ -1,0 +1,26 @@
+<div class="mb-3">
+    <br>
+     <input
+     
+       type="text"
+       class="form-control"
+       id="colorFilter"
+       placeholder="Search Color"
+       [(ngModel)]="filterText"
+     />
+ </div>
+ <table class="table m-4" routerLink = "/colors/list">
+     <thead>
+       <tr class="table">
+         <th>Color</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let color of colors | colorFilter:filterText"
+       routerLink = "/cars/color/{{color.colorId}}">
+        <td>{{color.colorName}}</td>
+        <td><button type="button" class="btn btn-success ms-3" style ="height: 45px; width: 180px;">Go {{color.colorName}} Cars</button></td>
+       </tr>
+     </tbody>
+   </table>
+
