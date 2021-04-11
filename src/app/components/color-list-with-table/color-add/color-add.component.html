@@ -1,0 +1,53 @@
+<button
+  type="button"
+  data-bs-toggle="modal"
+  data-bs-target="#colorAdd"
+  class="btn btn-outline-primary"
+  style="width: 85px"
+>
+  Add
+</button> 
+<div
+  class="modal fade"
+  id="colorAdd"
+  tabindex="-1"
+  aria-labelledby="colorAddLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="colorAddLabel">Add New Color</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+        <div class="modal-body">
+        <form [formGroup]="colorAddForm">
+          <div class="mb-3">
+            <input
+              type="text"
+              id="colorName-add"
+              formControlName="colorName"
+              class="form-control"
+              placeholder="Color Name"
+            />
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button
+            data-bs-dismiss="modal"
+            (click)="add()"
+            type="button"
+            class="btn btn-primary"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

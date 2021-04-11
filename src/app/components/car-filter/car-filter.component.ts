@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BrandService } from 'src/app/services/brand.service';
 import { ColorService } from 'src/app/services/color.service';
-import { Brand } from 'src/models/brand';
-import { Color } from 'src/models/color';
+import { Brand } from 'src/app/models/brand';
+import { Color } from 'src/app/models/color';
 
 @Component({
   selector: 'app-car-filter',
@@ -15,6 +15,7 @@ export class CarFilterComponent implements OnInit {
   colors: Color[];
   brandFilter: Number;
   colorFilter: Number;
+  dataLoaded = false;
   constructor(private colorService: ColorService,
               private brandService: BrandService) { }
 
@@ -26,13 +27,13 @@ export class CarFilterComponent implements OnInit {
   getBrands() {
     this.brandService.getBrands().subscribe((response) => {
       this.brands = response.data;
-
+      this.dataLoaded = true;
     });
   }
   getColors() {
     this.colorService.getColors().subscribe((response) => {
       this.colors = response.data;
-
+      this.dataLoaded = true;
     });
   }
   getSelectedBrand(brandId: Number) {

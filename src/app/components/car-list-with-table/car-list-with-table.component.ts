@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CarService } from 'src/app/services/car.service';
-import { Car } from 'src/models/car';
+import { Car } from 'src/app/models/car';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-car-list-with-table',
@@ -12,25 +13,39 @@ export class CarListWithTableComponent implements OnInit {
   cars:Car[];
   currentCar:Car;
   filterText="";
-  constructor(private carService:CarService) { }
+  message:string;
  
-  ngOnInit(): void {
+  dataLoaded = false;
+
+  constructor(private carService:CarService,
+              private toastrService:ToastrService,
+             
+              ) { }
+ 
+  ngOnInit() {
     this.getCars();
+    
   }
   getCars(){
     this.carService.getCars().subscribe(response => {
       this.cars = response.data
     })
   }
-  getCarClass(car:Car){
-    if(car == this.currentCar){
-      return "table-info cursorPointer"
-    }else{
-      return "cursorPointer"
-    }
-  }
   
   setCurrentCar(car:Car){
     this.currentCar=car;
   }
+
+  deleteCar(car:Car){
+    if(window.confirm("Are you sure you want to delete this car?")){
+        this.carService.delete(car).subscribe(data =>{
+        
+        setTimeout(() => {
+          this.toastrService.success(data.messages,"Delete Message")
+          window.location.reload();
+        }, 500);
+      })}
+  }
+
+ 
 }

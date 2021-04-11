@@ -1,0 +1,126 @@
+<body class="text-center">
+  <main class="form-signin">
+    <div class="mb-2">
+      <div *ngIf="userProfilePhoto">
+        <img
+          src="{{ baseUrl }}carimages/{{ userProfilePhoto.imagePath }}"
+          alt="..."
+          width="128"
+          height="128"
+          class="rounded-circle mb-2"
+        />
+        <div class="mb-3">
+          <button
+            type="button"
+            class="btn btn-outline-secondary rounded-pill"
+            style="width: 3cm"
+            (click)="PhotoEditTransaction()"
+          >
+            Edit
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="!userProfilePhoto">
+        <img
+          src="{{ baseUrl }}carimages/default-user-image.png"
+          alt="..."
+          width="128"
+          height="128"
+          class="rounded-circle mb-2"
+        />
+        <div class="mb-3">
+          <button
+            type="button"
+            class="btn btn-outline-secondary rounded-pill"
+            style="width: 3cm"
+            (click) = "PhotoAddTransaction()"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <form [formGroup]="userForm">
+      <div class="mb-2">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="firstName-profile"
+            formControlName="firstName"
+            [ngModel]="user.firstName"
+            placeholder="First Name"
+          />
+          <label for="firstName-profile">First Name</label>
+        </div>
+      </div>
+      <div class="mb-2">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="lastName-profile"
+            [ngModel]="user.lastName"
+            formControlName="lastName"
+            placeholder="Last Name"
+          />
+          <label for="lastName-profile">Last Name</label>
+        </div>
+      </div>
+      <div class="mb-2">
+        <div class="form-floating">
+          <input
+            type="email"
+            class="form-control"
+            id="email-profile"
+            [ngModel]="user.email"
+            formControlName="email"
+            placeholder="Email"
+          />
+          <label for="email-profile">Email address</label>
+        </div>
+      </div>
+    </form>
+
+    <div class="form-floating mb-2">
+      <input
+        type="text"
+        class="form-control"
+        id="creditScore-profile"
+        [ngModel]="userCreditScore.creditScore"
+        disabled
+      />
+      <label for="creditScore-profile">Credit Score</label>
+    </div>
+
+    <div class="floating mb-2" *ngIf="creditCards.length > 0">
+      <select class="form-select" id="creditCard-profile" value="selected">
+        <option value="selected">Credit Card(s)</option>
+        <option *ngFor="let creditCard of creditCards">
+          {{ creditCard.cardHolderName }} |
+          {{ creditCard.cardNumber | hiddenCreditCardNumber }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-floating mb-2">
+      <button
+        type="button"
+        (click)="updatePassword()"
+        class="btn btn-outline-primary"
+      >
+        Change Password
+      </button>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary mb-2" (click)="updateUser()">
+      Update
+    </button>
+
+    <button class="w-100 btn btn-lg btn-outline-danger" (click)="deleteUser()">
+      Delete My Account
+    </button>
+  </main>
+</body>

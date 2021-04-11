@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="row col-md-12">
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-header"><strong>Update Car</strong></div>
+        <div class="card-body">
+          <form [formGroup]="carUpdateForm">
+            <div class="mb-3">
+              <label for="carName-Update">Car Name</label>
+              <input
+                id="carName-Update"
+                type="text"
+                formControlName="carName"
+                class="form-control"
+                [ngModel]="car.carName"
+                placeholder="Car Name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="carBrand-Update">Brand</label>
+              <select
+                id="carBrand-Update"
+                class="form-select"
+                formControlName="brandId"
+                [ngModel]="car.brandId"
+              >
+                <option *ngFor="let brand of brands" [value]="brand.brandId">
+                  {{ brand.brandName }}
+                </option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="carColor-Update">Color</label>
+              <select
+                id="carColor-Update"
+                class="form-select"
+                formControlName="colorId"
+                [ngModel]="car.colorId"
+              >
+                <option *ngFor="let color of colors" [value]="color.colorId">
+                  {{ color.colorName }}
+                </option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="carDailyPrice-Update">Daily Price</label>
+              <input
+                id="carDailyPrice-Update"
+                type="number"
+                class="form-control"
+                formControlName="dailyPrice"
+                [ngModel]="car.dailyPrice"
+                placeholder="Daily Price"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="carModelYear-Update">Model Year</label>
+              <input
+                id="carModelYear-Update"
+                type="text"
+                formControlName="modelYear"
+                class="form-control"
+                [ngModel]="car.modelYear"
+                placeholder="Model Year"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="carCreditScore-Update">Credit Score</label>
+              <input
+                id="carCreditScore-Update"
+                type="number"
+                formControlName="creditScore"
+                class="form-control"
+                [ngModel]="car.creditScore"
+                placeholder="Credit Score (0-1999)"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="carDescription-Update">Description</label>
+              <input
+                id="carDescription-Update"
+                type="text"
+                formControlName="description"
+                class="form-control"
+                [ngModel]="car.description"
+                placeholder="Description"
+              />
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button (click)="saveChanges()" type="button" class="btn btn-primary">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="container">
+      <div class="card">
+        <div class="card-header"><strong>Car Image</strong></div>
+        <div class="card-body" *ngFor="let image of images">
+         <div class="container">
+          <img
+           
+            src="{{ imageUrl }}carimages/{{ image.imagePath }}"
+            class="card-img-top"
+            alt="..."
+            style="height: 7cm; width: 12cm"
+          />
+        </div>
+      </div>
+        <div class="card-footer">
+          <form [formGroup]="carUpdateForm">
+            <input
+              class="form-control"
+              type="file"
+              id="formFileMultiple"
+              formControlName="image"
+              (change)="handleFileInput($event)"
+              accept=".jpeg,.png,.jpg"
+              multiple
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

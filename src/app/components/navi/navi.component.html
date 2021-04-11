@@ -1,28 +1,74 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink="">RentCar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <!-- <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+<nav class="navbar navbar-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="">RentCar</a>
+
+  <div *ngIf="isAuth()">
+    <div>
+      <div class="btn-group " style="height: 45.5px; left: 10.8cm;" role="group">
+        <button type="button" class="btn btn-outline-secondary" routerLink="cars/list">Cars</button>
+        <button class="btn btn-outline-secondary" routerLink="brands/list">Brands</button>
+        <button class="btn btn-outline-secondary" routerLink="colors/list">Colors</button>
+      </div>
+    </div> 
+  </div>
+   
+
+    <div *ngIf="isAuth()">
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary"
+          type="button"
+          id="dropdown-user"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <div *ngIf="userProfilePhoto" class="dropdown-toggle">
+            <span class="m-2">Hi {{ user.firstName }}</span>
+            <img
+              src="{{ baseUrl }}carimages/{{ userProfilePhoto.imagePath }}"
+              alt="..."
+              width="32"
+              height="32"
+              class="rounded-circle"
+            />
+          </div>
+
+          <div *ngIf="!userProfilePhoto" class="dropdown-toggle">
+            <span class="m-2">Hi {{ user.firstName }}</span>
+            <img
+              src="{{ baseUrl }}carimages/default-user-image.png"
+              alt="..."
+              width="32"
+              height="32"
+              class="rounded-circle"
+            />
+          </div>
+        </button>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdown-user">
+          <li>
+            <a class="dropdown-item" routerLink="/users/{{ user.id }}/profile"
+              >Profile</a
+            >
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li> -->
-          <app-car-summary></app-car-summary>
-          <app-brand-summary></app-brand-summary>
-          <app-color-summary></app-color-summary>
-          <!-- <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li> -->
+          <li><hr class="dropdown-divider" /></li>
+          <li><a class="dropdown-item" (click)="logOut()">Sign out</a></li>
         </ul>
-        <!-- <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
-      </div> 
+      </div>
     </div>
-  </nav>
+    <div *ngIf="!isAuth()">
+      <div class="text-end">
+        <button
+          type="button"
+          class="btn btn-outline-dark me-2"
+          routerLink="/login"
+        >
+          Login
+        </button>
+        <button type="button" class="btn btn-secondary" routerLink="/register">
+          Sign up
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

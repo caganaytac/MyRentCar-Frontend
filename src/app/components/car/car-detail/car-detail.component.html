@@ -9,7 +9,14 @@
 
     <div class="carousel-inner">
       <div *ngFor="let image of images" [class]="getCurrentImageClass(image)" data-bs-interval="3000">
-        <img src="{{imageUrl}}/carimages/{{image.imagePath}}" class="d-block w-100" alt="...">
+        <div>
+        <div *ngIf="car.imagePath">
+          <img src="{{imageUrl}}carimages/{{image.imagePath}}" class="card-img-top" alt="..." style="height: 13cm; width: 22cm;">
+        </div>
+         <div *ngIf="!car.imagePath">
+          <img src="https://localhost:44377/carimages/images.png" class="card-img-top" alt="...">
+        </div>
+      </div>
       </div>
   
     </div>
@@ -29,41 +36,28 @@
       <div  class="card">
         <div class="card-body">
           <h5 class="card-title">
-            <strong> {{ this.car.carName }}</strong>
+            <strong> {{ car.carName }}</strong>
           </h5>
           <p class="card-text">{{ car.description }}</p>
         </div>
   
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Brand : {{ this.car.brandName }}</li>
-          <li class="list-group-item">Model : {{ this.car.modelYear }}</li>
-          <li class="list-group-item">Color : {{ this.car.colorName }}</li>
-          <li class="list-group-item">
-            Daily Price : {{ this.car.dailyPrice }} TL
-          </li>
-          <div class="card-body">
+          <li class="list-group-item">Brand : {{ car.brandName }}</li>
+          <li class="list-group-item">Model : {{ car.modelYear }}</li>
+          <li class="list-group-item">Color : {{ car.colorName }}</li>
+          <li class="list-group-item">Daily Price : {{ car.dailyPrice | currency: "$":"symbol-narrow":"1.2-2"}} / day</li>
+          <li class="list-group-item">Credit Score : {{car.creditScore}}</li>
 
-          <div class="d-grid gap-2 mb-2" *ngIf="car.status == true">
+          <div class="card-body">
+          <div class="d-grid gap-2 mb-2" *ngIf="car.status">
               <app-rental [car]="car"></app-rental>
           </div>
-          <div class="d-grid gap-2 mb-2" *ngIf="car.status == false">
+          <div class="d-grid gap-2 mb-2" *ngIf="!car.status">
               <div class="alert alert-danger">Car can't be rent.</div>
           </div>
-  
           </div>
+
         </ul>
-        </div>
-        <div class="card-body">
-          <button
-            routerLink="/cars"
-            (click)="getBack()"
-            type="button"
-            class="btn btn-primary ms-2" 
-            style="width: 240px;">
-            Back
-          </button>
-        </div>
-    </div>
-  
+      </div>
 </div>
 

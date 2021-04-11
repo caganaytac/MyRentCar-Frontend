@@ -1,0 +1,52 @@
+<button
+  type="button"
+  data-bs-toggle="modal"
+  data-bs-target="#brandAdd"
+  class="btn btn-outline-primary"
+  style="width: 85px;"
+>
+  Add
+</button> 
+<div
+  class="modal fade"
+  id="brandAdd"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New Car</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+        <div class="modal-body">
+        <form [formGroup]="brandAddForm">
+          <div class="mb-3">
+            <input
+              type="text"
+              formControlName="brandName"
+              class="form-control"
+              placeholder="Brand Name"
+            />
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button
+            data-bs-dismiss="modal"
+            (click)="add()"
+            type="button"
+            class="btn btn-primary"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

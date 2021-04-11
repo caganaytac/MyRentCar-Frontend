@@ -1,35 +1,58 @@
-<br><select
-  [(ngModel)]="brandFilter"
-  class="form-select"
-  aria-label="Default select example"
->
-  <option
-    *ngFor="let brand of brands"
-    [value]= "brand.brandId"
-    [selected]="getSelectedBrand(brand.brandId)"
-  >
-    {{ brand.brandName }}
-  </option>
-</select><br>
+<div *ngIf="dataLoaded == true">
+  <div class=" mb-1">
+    <button
+      routerLink="/cars/filter/{{ brandFilter }}/{{ colorFilter }}"
+      class="btn btn-dark btn-center"
+      style="width: 305px"
+    >
+      Filter
+    </button>
+  </div>
 
-<select
-  [(ngModel)]="colorFilter"
-  class="form-select"
-  aria-label="Default select example"
->
-  <option
-    *ngFor="let color of colors"
-    [value]="color.colorId"
-    [selected]="getSelectedColor(color.colorId)"
-  >
-    {{ color.colorName }}
-  </option>
-</select>
+  <div class="mb-4">
+    <button
+      routerLink="/cars"
+      class="btn btn-outline-secondary"
+      style="width: 305px"
+    >
+      Clear
+    </button>
+  </div>
 
-<button
-  routerLink="cars/filter/{{brandFilter}}/{{colorFilter}}"
-  class="btn btn-success mt-3" style="width: 300px;"
-  >Filter 
-</button>
+  <div>
+    <div class="mb-2">
+      <select
+        [(ngModel)]="brandFilter"
+        class="form-select"
+        aria-label="Default select example"
+        style="width: 305px"
+      >
+        <option [ngValue]="undefined" disabled>Choose Brand</option>
+        <option
+          *ngFor="let brand of brands"
+          [value]="brand.brandId"
+          [selected]="getSelectedBrand(brand.brandId)"
+        >
+          {{ brand.brandName }}
+        </option>
+      </select>
+    </div>
 
-<button routerLink="/cars" class="btn btn-danger" style="width: 300px;">Clear</button>
+    <div class="mb-3">
+      <select
+        [(ngModel)]="colorFilter"
+        class="form-select"
+        style="width: 305px"
+      >
+        <option [ngValue]="undefined" disabled>Choose Color</option>
+         <option
+          *ngFor="let color of colors"
+          [value]="color.colorId"
+          [selected]="getSelectedColor(color.colorId)"
+        >
+          {{ color.colorName }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>

@@ -1,32 +1,59 @@
-<div class="mb-3">
-   <br>
-    <input
-      type="text"
-      class="form-control"
-      id="carFilter"
-      placeholder="Search Car"
-      [(ngModel)]="filterText"
-    />
+<div class="table m-4">
+  <input
+    type="text"
+    class="form-control"
+    id="carFilter"
+    placeholder="Search Car"
+    [(ngModel)]="filterText"
+  />
 </div>
-<table class="table m-4"  routerLink = "/cars/list">
-    <thead>
-      <tr class="table">
-        <th>Car</th>
-        <th>Brand</th>
-        <th>Color</th>
-        <th>Daily Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let car of cars | carFilter:filterText"
-      (click)="setCurrentCar(car)"
-      routerLink = "/cars/details/{{car.carId}}"
-      [class]="getCarClass(car)">
-        <td>{{ car.carName }}</td>
-        <td>{{ car.brandName }}</td>
-        <td>{{ car.colorName}}</td>
-        <td>{{ car.dailyPrice }}</td>
-        <td><button type="button" class="btn btn-success ms-3">Details</button></td>
-      </tr>
-    </tbody>
-  </table>
+<table class="table m-4">
+  <thead>
+    <tr class="table">
+      <th>Car</th>
+      <th>Brand</th>
+      <th>Color</th>
+      <th>Daily Price</th>
+      <th><app-car-add></app-car-add></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let car of cars | carFilter: filterText">
+      <td>{{ car.carName }}</td>
+      <td>{{ car.brandName }}</td>
+      <td>{{ car.colorName }}</td>
+      <td>{{ car.dailyPrice }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="setCurrentCar(car)"
+          style="width: 85px"
+          routerLink="/cars/details/{{ car.carId }}"
+        >
+          Details
+        </button>
+      </td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-warning"
+          style="width: 85px"
+          routerLink="/cars/update/{{ car.carId }}"
+        >
+          Edit
+        </button>
+      </td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-danger"
+          style="width: 85px"
+          (click)="deleteCar(car)"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

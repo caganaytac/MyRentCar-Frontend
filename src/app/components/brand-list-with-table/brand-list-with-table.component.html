@@ -1,24 +1,54 @@
-<div class="mb-3">
-    <br>
-     <input
-       type="text"
-       class="form-control"
-       id="carFilter"
-       placeholder="Search Brand"
-       [(ngModel)]="filterText"
-     />
- </div>
- <table class="table m-4" routerLink = "/brands/list">
-     <thead>
-       <tr class="table">
-         <th>Brand</th>
-       </tr>
-     </thead>
-     <tbody>
-       <tr *ngFor="let brand of brands | brandFilter:filterText"
-       routerLink = "/cars/brand/{{brand.brandId}}">
-        <td>{{brand.brandName}}</td>
-        <td><button type="button" class="btn btn-success ms-3" style ="height: 45px; width: 180px;">Go {{brand.brandName}} Cars</button></td>
-       </tr>
-     </tbody>
-   </table>
+<div class="table m-4">
+  <input
+    type="text"
+    class="form-control"
+    id="carFilter"
+    placeholder="Search Brand"
+    [(ngModel)]="filterText"
+  />
+</div>
+<div>
+  <table class="table m-4">
+    <thead>
+      <tr class="table">
+        <th>Brand</th>
+        <th><app-brand-add></app-brand-add></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let brand of brands | brandFilter: filterText">
+        <td>{{ brand.brandName }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-success"
+            style="width: 85px"
+            routerLink="/cars/brand/{{ brand.brandId }}"
+          >
+            Go
+          </button>
+        </td>
+        <td>
+        <button
+          type="button"
+          class="btn btn-warning"
+          style="width: 85px"
+          routerLink = "/brands/update/{{brand.brandId}}"
+        >
+          Edit
+        </button>
+      </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-danger"
+            style="width: 85px"
+            (click)="deleteBrand(brand)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

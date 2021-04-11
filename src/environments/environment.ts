@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   backend: {
-    baseURL: "https://localhost:44377/api/",
-    hostURL:"https://localhost:44377/"
+    apiURL: "https://localhost:44377/api/",
+    baseURL:"https://localhost:44377/"
   }
 };
 

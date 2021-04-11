@@ -8,18 +8,22 @@
        placeholder="Search Color"
        [(ngModel)]="filterText"
      />
+   
  </div>
- <table class="table m-4" routerLink = "/colors/list">
+ <table class="table m-4">
      <thead>
        <tr class="table">
          <th>Color</th>
+         <th><app-color-add></app-color-add></th>
        </tr>
      </thead>
      <tbody>
        <tr *ngFor="let color of colors | colorFilter:filterText"
-       routerLink = "/cars/color/{{color.colorId}}">
+       >
         <td>{{color.colorName}}</td>
-        <td><button type="button" class="btn btn-success ms-3" style ="height: 45px; width: 180px;">Go {{color.colorName}} Cars</button></td>
+        <td><button type="button" class="btn btn-success" style ="width: 85px;" routerLink = "/cars/color/{{color.colorId}}">Go</button></td>
+        <td><button type="button" class="btn btn-warning " style="width: 85px;" routerLink = "/colors/update/{{color.colorId}}">Edit</button></td>
+        <td><button type="button" class="btn btn-danger" style="width: 85px;" (click)="deleteColor(color)">Delete</button></td> 
        </tr>
      </tbody>
    </table>

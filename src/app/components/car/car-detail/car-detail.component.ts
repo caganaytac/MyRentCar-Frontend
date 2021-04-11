@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { environment } from 'src/environments/environment';
-import { Car } from 'src/models/car';
-import { CarImage } from 'src/models/carImage';
+import { Car } from 'src/app/models/car';
+import { CarImage } from 'src/app/models/carImage';
 
 @Component({
   selector: 'app-car-detail',
@@ -15,7 +15,7 @@ export class CarDetailComponent implements OnInit {
 
   car:Car;
   images:CarImage[];
-  imageUrl = environment.backend.hostURL;
+  imageUrl = environment.backend.baseURL;
 
 
   constructor(private carService:CarService, 
@@ -27,7 +27,6 @@ export class CarDetailComponent implements OnInit {
       if(params["carId"]){
         this.getCarDetails(params["carId"]);
         this.getCarImagesByCarId(params["carId"]);
-        console.log(this.getCarDetails(params["carId"]))
       }
     })
   }
@@ -38,7 +37,7 @@ export class CarDetailComponent implements OnInit {
     })
   }
   getCarImagesByCarId(carId:number){
-    this.carImageService.getCarsByCarId(carId).subscribe(response =>{
+    this.carImageService.getCarImagesByCarId(carId).subscribe(response =>{
       this.images = response.data
     })
   }

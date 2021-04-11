@@ -1,0 +1,125 @@
+
+<!-- Button trigger modal -->
+<button
+  type="button"
+  data-bs-toggle="modal"
+  data-bs-target="#carAdd"
+  class="btn btn-outline-primary"
+  style="width: 85px"
+>
+  Add
+</button> 
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="carAdd"
+  tabindex="-1"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="carLabel-add">Add New Car</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+        <div class="modal-body">
+        <form [formGroup]="carAddForm">
+          <div class="mb-3">
+            <input
+              type="text"
+              formControlName="carName"
+              class="form-control"
+              placeholder="Car Name"
+            />
+          </div>
+          <div class="mb-3">
+            <select
+              class="form-select"
+              formControlName="brandId"
+              placeholder="Brand"
+            >
+              <option value=0 disabled>Choose Brand</option>
+              <option *ngFor="let brand of brands" [ngValue]="brand.brandId">
+                {{ brand.brandName }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <select
+              class="form-select"
+              formControlName="colorId"
+              placeholder="Color"
+            >
+            <option value=0 disabled>Choose Color</option>
+              <option *ngFor="let color of colors" [ngValue]="color.colorId">
+                {{ color.colorName }}
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <input
+              type="number"
+              class="form-control"
+              formControlName="dailyPrice"
+              placeholder="Daily Price"
+            />
+          </div>
+
+          <div class="mb-3">
+            <input
+              type="text"
+              formControlName="modelYear"
+              class="form-control"
+              placeholder="Model Year"
+            />
+          </div>
+
+          <div class="mb-3">
+            <input
+              type="number"
+              formControlName="creditScore"
+              class="form-control"
+              placeholder="Credit Score (0-1999)"
+            />
+          </div>
+
+          <div class="mb-3">
+            <input
+              type="text"
+              formControlName="description"
+              class="form-control"
+              placeholder="Description"
+            />
+          </div>
+
+          <input
+          class="form-control"
+          type="file"
+          id="formFileMultiple"
+          formControlName="image"
+          (change)="handleFileInput($event)"
+          accept=".jpeg,.png,.jpg"
+          multiple
+          />
+        </form>
+       
+         <div class="modal-footer">
+          <button
+            data-bs-dismiss="modal"
+            (click)="add()"
+            type="button"
+            class="btn btn-primary"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
