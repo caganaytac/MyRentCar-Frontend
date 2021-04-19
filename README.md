@@ -9,8 +9,7 @@
 [![NgRx](https://img.shields.io/badge/NgRx-DD0031?style=for-the-badge&logo=NPM&logoColor=white)](https://ngrx.io/)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/docs/)
 
-[linkedin-shield]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
-[linkedin-url]: https://linkedin.com/in/caganaytac
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.1.
 
