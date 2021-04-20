@@ -21,7 +21,7 @@ export class CarUpdateComponent implements OnInit {
 
 
   car: Car
-  images:CarImage[]
+  images: CarImage[]
   carUpdateForm: FormGroup;
   brands: Brand[]
   colors: Color[]
@@ -37,7 +37,7 @@ export class CarUpdateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private carImageService: CarImageService,
-    private router:Router
+    private router: Router
 
   ) { }
 
@@ -58,11 +58,11 @@ export class CarUpdateComponent implements OnInit {
   getCarById(id: number) {
     this.carService.getCarDetailsByItem(id).subscribe(response => {
       this.car = response.data
-      
+
     })
   }
-  
-  getCarImages(id:number){
+
+  getCarImages(id: number) {
     this.carImageService.getCarImagesByCarId(id).subscribe(response => {
       this.images = response.data
     })
@@ -98,14 +98,14 @@ export class CarUpdateComponent implements OnInit {
   handleFileInput(e: any) {
     for (let j = 0; j < e.target.files.length; j++) {
       let fileItem = e.target.files[j];
-      this.formData.append('image', fileItem); 
+      this.formData.append('image', fileItem);
     }
   }
 
   saveChanges() {
     if (this.carUpdateForm.valid) {
       this.carUpdateForm.addControl("carId", new FormControl(this.car.carId)),
-      this.formData.append('carId', this.car.carId.toString());
+        this.formData.append('carId', this.car.carId.toString());
       this.formData.append('carName', this.carUpdateForm.value.carName);
       this.formData.append('colorId', this.carUpdateForm.value.colorId);
       this.formData.append('brandId', this.carUpdateForm.value.brandId);
@@ -113,24 +113,26 @@ export class CarUpdateComponent implements OnInit {
       this.formData.append('creditScore', this.carUpdateForm.value.creditScore);
       this.formData.append('description', this.carUpdateForm.value.description);
       this.formData.append('modelYear', this.carUpdateForm.value.modelYear);
-              
+
       this.carService.update(this.formData).subscribe(response => {
         this.toastrService.success(response.messages, "Success")
-          this.router.navigate(["/cars/list"])
-        
-      }, responseError => {
-        if (responseError.error.Errors.length > 0)
-          for (let i = 0; i < responseError.error.Errors.length; i++) {
-            this.toastrService.error(responseError.error.Errors[i].ErrorMessage, "Validation Exception")
-          }
+        this.router.navigate(["/cars/list"])
+
       })
-    }
-    else {
-      this.toastrService.error("The form is missing.", "Attention")
+      //     , responseError => {
+      //       if (responseError.error.Errors.length > 0)
+      //         for (let i = 0; i < responseError.error.Errors.length; i++) {
+      //           this.toastrService.error(responseError.error.Errors[i].ErrorMessage, "Validation Exception")
+      //         }
+      //     }
+      //   }
+      //   else {
+      //     this.toastrService.error("The form is missing.", "Attention")
+      //   }
+      // }
+
+
+
     }
   }
-
-
-
-
 }

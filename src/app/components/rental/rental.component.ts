@@ -6,6 +6,7 @@ import { Car } from 'src/app/models/car';
 import { Customer } from 'src/app/models/customer';
 import { Rental } from 'src/app/models/rental';
 import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-rental',
@@ -19,7 +20,8 @@ export class RentalComponent implements OnInit {
     private customerService: CustomerService,
     private userService: UserService,
     private router: Router,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private authService:AuthService) { }
 
   customer: Customer
   rentDate: Date
@@ -57,7 +59,7 @@ export class RentalComponent implements OnInit {
       carId: this.car.carId,
       customerId: this.customer.customerId
     }
-    this.router.navigate(['/payment', JSON.stringify(newRental)]);
-    this.toastr.info("You are routing to payment...", "Info");
+    this.router.navigate(['/payment', JSON.stringify(newRental)])
+    this.toastr.info('You are routing to payment.', 'Info')
   }
 }

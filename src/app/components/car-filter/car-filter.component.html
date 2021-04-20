@@ -24,7 +24,6 @@
       <select
         [(ngModel)]="brandFilter"
         class="form-select"
-        aria-label="Default select example"
         style="width: 305px"
       >
         <option [ngValue]="undefined" disabled>Choose Brand</option>
@@ -38,7 +37,7 @@
       </select>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-4">
       <select
         [(ngModel)]="colorFilter"
         class="form-select"
@@ -52,6 +51,18 @@
         >
           {{ color.colorName }}
         </option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <select
+        class="form-select"
+        style="width: 305px"
+      >
+        <option selected disabled>Order By</option>
+         <option>Price Asc</option>
+         <option>Price Dec</option>
+         <option>A-Z</option>
       </select>
     </div>
   </div>

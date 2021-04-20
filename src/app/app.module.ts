@@ -37,6 +37,7 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { HiddenCreditCardNumberPipe } from './pipes/hidden-credit-card-number.pipe';
 import { EditProfilePhotoComponent } from './components/user/profile/edit-profile-photo/edit-profile-photo.component';
 import { AddProfilePhotoComponent } from './components/user/profile/add-profile-photo/add-profile-photo.component';
+import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -83,6 +84,7 @@ import { AddProfilePhotoComponent } from './components/user/profile/add-profile-
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},
+    {provide: HTTP_INTERCEPTORS, useClass:HttpErrorInterceptor, multi:true},
     DialogService
   ],
   bootstrap: [AppComponent]

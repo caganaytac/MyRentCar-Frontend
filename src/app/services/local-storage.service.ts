@@ -10,7 +10,8 @@ export class LocalStorageService {
   getItem(key: string) {
     var item = localStorage.getItem(key);
     if (item !== null) {
-      return item;
+      var result = JSON.parse(item)
+      return result;
     } else {
       return null;
     }
@@ -18,7 +19,7 @@ export class LocalStorageService {
 
   setItem(key:string, value:string){
     if(this.getItem(key) === null){
-      localStorage.setItem(key, value);
+      localStorage.setItem(key, JSON.stringify(value));
     }
   }
 
